@@ -75,6 +75,9 @@ SimpleCov.start 'rails' do
   add_filter '/db/'
   add_filter '/spec/'
   add_filter '/test/'
+  add_filter do |source_file|
+    source_file.lines.count < 10
+  end
 end
 ```
 Now when you run RSpec you will see the code coverage and generate a report in the coverage folder.</br>
