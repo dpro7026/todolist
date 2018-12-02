@@ -52,3 +52,29 @@ Create the databases:
 rails db:create
 ```
 Commit to Git.</br>
+
+## Add simplecov for code coverage reports
+Add to `gemfile`:
+```
+group :test do
+  # Code coverage
+  gem 'simplecov', require: false
+end
+```
+Add to `.gitignore`:
+```
+#I gnore coverage files
+coverage/*
+```
+At the top of `spec/spec_helper.rb`:
+```
+require 'simplecov'
+SimpleCov.start 'rails' do
+  # These filters are excluded from results
+  add_filter '/bin/'
+  add_filter '/db/'
+  add_filter '/spec/'
+  add_filter '/test/'
+end
+```
+Now when you run RSpec you will see the code coverage and generate a report in the coverage folder.</br>
