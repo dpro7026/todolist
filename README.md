@@ -81,3 +81,19 @@ SimpleCov.start 'rails' do
 end
 ```
 Now when you run RSpec you will see the code coverage and generate a report in the coverage folder.</br>
+Add Brakeman to the `Gemfile`:
+```
+group :development do
+  ...
+  # Static security vulnerability analysis
+  gem 'brakeman'
+end
+```
+Run:
+```
+bundle install
+```
+Run Brakeman report:
+```
+brakeman
+```
