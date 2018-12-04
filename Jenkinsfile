@@ -1,31 +1,12 @@
-node {
-        stage("Main build") {
-
-            checkout scm
-
-            docker.image('ruby:2.5.1').inside {
-
-              stage("Install Bundler") {
-                sh "gem install bundler --no-rdoc --no-ri"
-              }
-
-              stage("Use Bundler to install dependencies") {
-                sh "bundle install"
-              }
-
-              stage("Build package") {
-                sh "bundle exec rake build:deb"
-              }
-
-              stage("Archive package") {
-                archive (includes: 'pkg/*.deb')
-              }
-
-           }
-
+pipeline {
+    agent {
+        docker { image 'ruby:2.5.1' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'ruby -v'
+            }
         }
-
-        // Clean up workspace
-        step([$class: 'WsCleanup'])
-
+    }
 }
